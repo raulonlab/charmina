@@ -1,0 +1,16 @@
+extract:
+  use_llm_refine_description: true  # Use LLM to refine and clean up metadata's description
+
+transform: {}
+  
+scribe:
+  front_matter_metadata: true  # Include front matter with metadata in the output file
+
+openai:
+  api_key:
+  # organization:
+  # project:
+  # base_url:
+  # websocket_base_url:
+  # timeout:
+  # max_retries:

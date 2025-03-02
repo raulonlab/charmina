@@ -1,0 +1,18 @@
+# Default prompt presets
+
+refine_text_system: >
+  You find the introduction part from a text that explains the main topic.  
+  You ignore timestamps, links, resource sections, or promotional content. 
+
+
+refine_text_user: >
+  Find and extract ONLY the introduction that explains the main topic from the text.
+  The introduction usually appears at the beginning of the text, before any section headers or links.
+  Do **not** modify, summarize, or rephrase the original wording.
+  Do **not** add any additional information.
+  If context is provided, use it to determine the main topic; otherwise, infer it from the text.  
+  
+  Context: "{context}"
+
+  Text: {text}  
+

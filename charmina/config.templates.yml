@@ -1,0 +1,68 @@
+
+# Default Jinja2 templates used to scribe the output file
+audio_template: |
+  ---
+  {% if metadata.title -%}
+  title: {{ metadata.title | title }}
+  {% endif %}
+  {% if metadata.author -%}
+  author: {{ metadata.author | title }}
+  {% endif %}
+  {% if metadata.publish_date -%}
+  publish_date: {{ metadata.publish_date }}
+  {% endif %}
+  {% if metadata.description -%}
+  description: {{ metadata.description | safe }}
+  {% endif %}
+  {% if metadata.language -%}
+    language: {{ metadata.language }}
+  {% endif %}
+  
+  ---
+
+  {% if metadata.title %}
+  # {{ metadata.title }}
+  This is a {{ metadata.source_type }} transcription published by **{{ metadata.author }}** on **{{ metadata.publish_date }}**. 
+  {% endif %}
+
+  {% if metadata.summary %}
+  {{ metadata.summary }}
+  {% endif %}
+
+  {{ chunk }}
+
+
+document_template: |
+  ---
+  {% if metadata.title -%}
+  title: {{ metadata.title | title }}
+  {% endif %}
+  {% if metadata.author -%}
+  author: {{ metadata.author | title }}
+  {% endif %}
+  {% if metadata.publish_date -%}
+  publish_date: {{ metadata.publish_date }}
+  {% endif %}
+  {% if metadata.description -%}
+  description: {{ metadata.description | safe }}
+  {% endif %}
+  {% if metadata.language -%}
+    language: {{ metadata.language }}
+  {% endif %}
+  
+  ---
+  
+  {% if metadata.title %}
+  # {{ metadata.title }}
+  This is part of a document published by **{{ metadata.author }}** on **{{ metadata.publish_date }}**. 
+  {% endif %}
+  
+  {% if metadata.summary %}
+  {{ metadata.summary }}
+  {% endif %}
+  
+  {{ chunk }}
+
+
+
+

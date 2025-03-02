@@ -1,0 +1,57 @@
+[tool.poetry]
+name = "charmina"
+packages = [
+    {include = "charmina"},
+]
+# include = ["charmina/config.yml", "charmina/config.prompts.yml", "charmina/config.templates.yml"]
+exclude = ["tests"]
+version = "0.1.0"
+description = "Transform your documents into AI-ready Markdown files optimized for efficient embedding calculations in AI chats and RAG systems [WIP]"
+authors = ["Raul On Lab <raulonlab@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"
+openai = "^1.23"
+typing-extensions = "^4.9.0"
+python-dotenv = "^1.0.1"
+tqdm = "^4.66.2"
+rich = "^13.7.1"
+requests = "^2.31.0"
+deepmerge = "^1.1.0"
+pyyaml = "^6.0.1"
+pytubefix = "^8.8.3"
+feedparser = "^6.0.11"
+music-tag = "*"
+tiktoken = "^0.6.0"
+typer = "^0.15.2"
+marker-pdf = "^1.5.6"
+datafiles = "^2.3.3"
+python-dateutil = "^2.9.0.post0"
+faster-whisper = "^1.1.1"
+jinja2 = "^3.1.5"
+syntok = "^1.4.4"
+
+[tool.poetry.group.dev.dependencies]
+deptry = "^0.12.0"
+pylint = "^3.1.0"
+autoflake = "^2.3.0"
+black = "^25.1.0"
+pre-commit = "^3.6.2"
+pretty-errors = "^1.2.25"
+datamodel-code-generator = "^0.25.6"
+# tuna = "^0.5.11"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+charmina = "charmina.__main__:main"
+
+[tool.datamodel-codegen]
+field-constraints = true
+snake-case-field = true
+strip-default-none = false
+target-python-version = "3.10"
+output-model-type = "dataclasses.dataclass"

@@ -1,7 +1,7 @@
 import logging
 from charmina.libs.logging_setup import setup as setup_logging
 from charmina.config import Config
-from charmina.cli.cli import app as charmina_app
+from charmina.cli.cli import app
 
 
 def init():
@@ -22,20 +22,10 @@ def init():
         log_file_path=config.LOG_FILE_PATH,
     )
 
-    # Setup development tools
-    try:
-        pass
-    except ImportError:
-        pass
-
-
-def run_cli():
-    charmina_app()
-
 
 def main():
     init()
-    run_cli()
+    app()
 
 
 if __name__ == "__main__":

@@ -3,12 +3,28 @@ name = "charmina"
 packages = [
     {include = "charmina"},
 ]
-# include = ["charmina/config.yml", "charmina/config.prompts.yml", "charmina/config.templates.yml"]
 exclude = ["tests"]
 version = "0.1.0"
-description = "Transform your documents into AI-ready Markdown files optimized for efficient embedding calculations in AI chats and RAG systems [WIP]"
+description = "Transform your documents into AI-ready Markdown files optimized for efficient embedding calculations in AI chats and RAG systems"
 authors = ["Raul On Lab <raulonlab@gmail.com>"]
 readme = "README.md"
+license = "MIT"
+homepage = "https://github.com/raulonlab/charmina"
+repository = "https://github.com/raulonlab/charmina"
+documentation = "https://github.com/raulonlab/charmina"
+keywords = ["markdown", "rag", "document-processing", "transcription"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Text Processing :: Markup :: Markdown",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+include = ["charmina/config.yml", "charmina/config.prompts.yml", "charmina/config.templates.yml"]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"

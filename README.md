@@ -1,4 +1,4 @@
-# [Charmina](https://github.com/raulonlab/charmina)
+# Charmina
 
 Yet another CLI tool and python package to transform your raw content into Markdown format optimized for AI consumption.
 
@@ -20,7 +20,9 @@ Yet another CLI tool and python package to transform your raw content into Markd
 
 ## Introduction
 
-Charmina is a document processing tool that makes AI content preparation simple. It transforms YouTube videos, podcasts, and raw documents into AI-ready Markdown files, optimized for embedding calculations in AI chat systems and RAG applications.
+Charmina is a document processing tool that makes AI content preparation simple. It transforms YouTube videos, podcasts, and raw documents into AI-ready Markdown files, optimized for embedding calculations in AI chat systems and RAG applications. The process is divided into 4 stages: **download**, **extract**, **transform** and **scribe**.
+
+![Charmina Pipeline Diagram](./docs/charmina_diagram.png)
 
 Key features:
 - **Multi-source Support**: Process content from various sources including YouTube videos, podcasts and local documents in different formats (mp3, pdf, txt, md, etc).
@@ -79,18 +81,23 @@ charmina --help
 ```bash
 Usage: charmina [OPTIONS] COMMAND [ARGS]...
 
-╭─ Options ────────────────────────────────────────────────────────────────────────────────────╮
-│ --install-completion          Install completion for the current shell.                      │
-│ --show-completion             Show completion for the current shell, to copy it or customize │
-│                               the installation.                                              │
-│ --help                        Show this message and exit.                                    │
-╰──────────────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Commands ───────────────────────────────────────────────────────────────────────────────────╮
-│ env       Print the current value of environment variables                                   │
-│ config    Print the active project configuration (config.yml)                                │
-│ project   Manage projects: create, activate, deactivate, list and remove                     │
-│ run       Run pipeline stages: download, extract, transform and scribe                       │
-╰──────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ──────────────────────────────────────────────────╮
+│ --install-completion          Install completion for the   │
+│                               current shell.               │
+│ --show-completion             Show completion for the      │
+│                               current shell, to copy it or │
+│                               customize the installation.  │
+│ --help                        Show this message and exit.  │
+╰────────────────────────────────────────────────────────────╯
+╭─ Commands ─────────────────────────────────────────────────╮
+│ env       Print the current value of environment variables │
+│ config    Print the active project configuration           │
+│           (config.yml)                                     │
+│ project   Manage projects: create, activate, deactivate,   │
+│           list and remove                                  │
+│ run       Run pipeline stages: download, extract,          │
+│           transform and scribe                             │
+╰────────────────────────────────────────────────────────────╯
 ```
 
 ## Create and Manage Projects

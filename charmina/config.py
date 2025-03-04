@@ -17,23 +17,20 @@ load_dotenv(
 
 @dataclass
 class Config(object):
-    _PROJECT_STORE_DIRECTORYNAME: ClassVar[str] = (
-        "db_files"  # Name of the project store directory
-    )
     _PROJECT_SOURCE_DOCUMENTS_DIRECTORYNAME: ClassVar[str] = (
-        "source"  # Name of the directory containing the source documents used as an input of the transformation process
+        "charmina_source"  # Name of the directory containing the source documents used as an input of the transformation process
     )
     _PROJECT_OUTPUT_DOCUMENTS_DIRECTORYNAME: ClassVar[str] = (
-        "output"  # Name of the directory where the transformed documents are saved
+        "charmina_output"  # Name of the directory where the transformed documents are saved
     )
     _PROJECT_CONFIG_FILENAME: ClassVar[str] = (
-        "config.yml"  # Name of the project config file
+        "charmina.config.yml"  # Name of the project config file
     )
     _PROJECT_CONFIG_TEMPLATES_FILENAME: ClassVar[str] = (
-        "config.templates.yml"  # Name of the project config templates file
+        "charmina.templates.yml"  # Name of the project config templates file
     )
     _PROJECT_CONFIG_PROMPTS_FILENAME: ClassVar[str] = (
-        "config.prompts.yml"  # Name of the project config prompts file
+        "charmina.prompts.yml"  # Name of the project config prompts file
     )
     _YOUTUBE_SOURCES_FILENAME: ClassVar[str] = (
         "youtube.sources"  # Name of the youtube sources file

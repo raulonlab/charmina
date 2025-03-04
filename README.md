@@ -92,7 +92,7 @@ Usage: charmina [OPTIONS] COMMAND [ARGS]...
 ╭─ Commands ─────────────────────────────────────────────────╮
 │ env       Print the current value of environment variables │
 │ config    Print the active project configuration           │
-│           (config.yml)                                     │
+│           (charmina.config.yml)                            │
 │ project   Manage projects: create, activate, deactivate,   │
 │           list and remove                                  │
 │ run       Run pipeline stages: download, extract,          │
@@ -112,15 +112,15 @@ Each project has the following structure:
 ```
 📁 _projects/
 ├─ 📁 project_name/
-│  ├─ 📁 output/              # Processed Markdown files ready for AI consumption
-│  ├─ 📁 sources/             # Raw files to transform (mp3, pdf, txt, etc)
-│  │  ├─ 📁 youtube/          # Downloaded YouTube content (mp3)
-│  │  └─ 📁 podcasts/         # Downloaded podcast content (mp3)
-│  ├─ 📄 config.yml           # Project-specific configuration
-│  ├─ 📄 config.prompts.yml   # Custom LLM prompts for content processing
-│  ├─ 📄 config.templates.yml # Output file templates
-│  ├─ 📄 podcast.sources      # List of podcast feed URLs
-│  └─ 📄 youtube.sources      # List of YouTube URLs (channels, playlists, videos)
+│  ├─ 📁 charmina_output/       # Processed Markdown files ready for AI consumption
+│  ├─ 📁 charmina_sources/      # Raw files to transform (mp3, pdf, txt, etc)
+│  │  ├─ 📁 youtube/            # Downloaded YouTube content (mp3)
+│  │  └─ 📁 podcasts/           # Downloaded podcast content (mp3)
+│  ├─ 📄 charmina.config.yml    # Project-specific configuration
+│  ├─ 📄 charmina.prompts.yml   # Custom LLM prompts for content processing
+│  ├─ 📄 charmina.templates.yml # Output file templates
+│  ├─ 📄 podcast.sources        # List of podcast feed URLs
+│  └─ 📄 youtube.sources        # List of YouTube URLs (channels, playlists, videos)
 ```
 
 Manage your projects with these commands:
@@ -163,7 +163,7 @@ The extract stage searchs for source files in the `sources/` directory to extrac
 
 Files are processed in parallel (up to 4 workers) with these steps:
 1. Extract metadata (title, description, duration, etc.)
-2. Optionally refine descriptions using LLM to clean up timestamps, links, and promotional content (prompts can be customized in `.config.prompts.yml`)
+2. Optionally refine descriptions using LLM to clean up timestamps, links, and promotional content (prompts can be customized in `charmina.prompts.yml`)
 3. Saves metadata content alongside the source file with extension `.metadata.yml`.
 
 The metadata file also includes a default configuration for the transformtion stage that you can edit manually to customize the transform process (ie: page range, chapters, etc.).
@@ -182,7 +182,7 @@ For each source file, the transform stage:
 
 ⚠️ Audio transcription can be resource-intensive, so files are processed sequentially by default.
 
-Some parameters are customizable through project configuration (see [./charmina/config.yml](./charmina/config.yml)):
+Some parameters are customizable through project configuration (see [./charmina/charmina.config.yml](./charmina/charmina.config.yml)):
 - Whisper model and package for audio transcription
 - PDF extraction settings
 - Processing parameters
@@ -193,12 +193,12 @@ The scribe stage merges the transformed content with the metadata to create AI-r
 
 For each source file, the scribe stage:
 1. Loads the transform `.transform.yml` and metadata `.metadata.yml` files
-2. Renders the output Markdown using Jinja templates (templates can be customized in `.config.templates.yml`)
+2. Renders the output Markdown using Jinja templates (templates can be customized in `charmina.templates.yml`)
 3. Saves the Markdown file in the output directory `/projects/project_name/output/`
 
 ⚠️ The scribe stage is currently experimental and may not work as expected for all content types.
 
-Some parameters are customizable through project configuration (see [./charmina/config.yml](./charmina/config.yml)):
+Some parameters are customizable through project configuration (see [./charmina/charmina.config.yml](./charmina/charmina.config.yml)):
 
 ## Configuration with Environment Variables
 

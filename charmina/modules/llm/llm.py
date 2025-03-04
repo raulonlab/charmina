@@ -2,7 +2,7 @@ from openai import OpenAI
 from typing import Dict
 
 
-# Map prompts with keys in config.prompts.yml
+# Map prompts with keys in charmina.prompts.yml
 class _PROMPT_MAPPING:
     REFINE_TEXT_SYSTEM = "refine_text_system"
     REFINE_TEXT_USER = "refine_text_user"

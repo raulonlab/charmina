@@ -28,19 +28,19 @@ PODCAST_SOURCES_INITIAL_CONTENT = """
 
 PROJECT_CONFIG_INITIAL_CONTENT = """
 # Override default project config
-# See default config file in https://github.com/raulonlab/charmina/blob/main/charmina/config.yml,
+# See default config file in https://github.com/raulonlab/charmina/blob/main/charmina/charmina.config.yml,
 
 """
 
 PROJECT_CONFIG_PROMPTS_INITIAL_CONTENT = """
 # Change the prompts used in the project.
-# See default prompts in https://github.com/raulonlab/charmina/blob/main/charmina/config.prompts.yml,
+# See default prompts in https://github.com/raulonlab/charmina/blob/main/charmina/charmina.prompts.yml,
 
 """
 
 PROJECT_CONFIG_TEMPLATES_INITIAL_CONTENT = """
 # Change the templates used in the project to render the output files.
-# See default templates in https://github.com/raulonlab/charmina/blob/main/charmina/config.templates.yml,
+# See default templates in https://github.com/raulonlab/charmina/blob/main/charmina/charmina.templates.yml,
 
 """
 
@@ -62,10 +62,14 @@ def create_project(project_name: str):
     logging.debug(f"Initializing project '{project_name}'")
     project_path = Path(_global_config.PROJECTS_DIRECTORY_PATH, project_name)
     if project_path.exists():
-        logging.warning(
-            f"Project directory '{project_name}' already exists... skipping"
+        confirmation_response = typer.confirm(
+            f"Project directory '{project_name}' already exists. Do you want to continue creating the initial project files in it?",
+            default=False,
+            abort=False,
         )
-        return
+        if not confirmation_response:
+            raise typer.Abort()
+
     # project directory
     project_path.mkdir(parents=True, exist_ok=True)
 
@@ -83,31 +87,41 @@ def create_project(project_name: str):
         parents=True, exist_ok=True
     )
 
-    # project sources files
-    with open(
-        Path(project_path, Config._YOUTUBE_SOURCES_FILENAME), "w", encoding="utf-8"
-    ) as file:
-        file.write(YOUTUBE_SOURCES_INITIAL_CONTENT)
-    with open(
-        Path(project_path, Config._PODCAST_SOURCES_FILENAME), "w", encoding="utf-8"
-    ) as file:
-        file.write(PODCAST_SOURCES_INITIAL_CONTENT)
-    with open(
-        Path(project_path, Config._PROJECT_CONFIG_FILENAME), "w", encoding="utf-8"
-    ) as file:
-        file.write(PROJECT_CONFIG_INITIAL_CONTENT)
-    with open(
-        Path(project_path, Config._PROJECT_CONFIG_PROMPTS_FILENAME),
-        "w",
-        encoding="utf-8",
-    ) as file:
-        file.write(PROJECT_CONFIG_PROMPTS_INITIAL_CONTENT)
-    with open(
-        Path(project_path, Config._PROJECT_CONFIG_TEMPLATES_FILENAME),
-        "w",
-        encoding="utf-8",
-    ) as file:
-        file.write(PROJECT_CONFIG_TEMPLATES_INITIAL_CONTENT)
+    # project sources files. Skip if they already exist
+    youtube_sources_path = Path(project_path, Config._YOUTUBE_SOURCES_FILENAME)
+    podcast_sources_path = Path(project_path, Config._PODCAST_SOURCES_FILENAME)
+
+    if not youtube_sources_path.exists():
+        with open(youtube_sources_path, "w", encoding="utf-8") as file:
+            file.write(YOUTUBE_SOURCES_INITIAL_CONTENT)
+    else:
+        logging.warning(f"Skipping '{youtube_sources_path}' because it already exists")
+    if not podcast_sources_path.exists():
+        with open(podcast_sources_path, "w", encoding="utf-8") as file:
+            file.write(PODCAST_SOURCES_INITIAL_CONTENT)
+    else:
+        logging.warning(f"Skipping '{podcast_sources_path}' because it already exists")
+
+    # project config files. Skip if they already exist
+    config_path = Path(project_path, Config._PROJECT_CONFIG_FILENAME)
+    prompts_path = Path(project_path, Config._PROJECT_CONFIG_PROMPTS_FILENAME)
+    templates_path = Path(project_path, Config._PROJECT_CONFIG_TEMPLATES_FILENAME)
+
+    if not config_path.exists():
+        with open(config_path, "w", encoding="utf-8") as file:
+            file.write(PROJECT_CONFIG_INITIAL_CONTENT)
+    else:
+        logging.warning(f"Skipping '{config_path}' because it already exists")
+    if not prompts_path.exists():
+        with open(prompts_path, "w", encoding="utf-8") as file:
+            file.write(PROJECT_CONFIG_PROMPTS_INITIAL_CONTENT)
+    else:
+        logging.warning(f"Skipping '{prompts_path}' because it already exists")
+    if not templates_path.exists():
+        with open(templates_path, "w", encoding="utf-8") as file:
+            file.write(PROJECT_CONFIG_TEMPLATES_INITIAL_CONTENT)
+    else:
+        logging.warning(f"Skipping '{templates_path}' because it already exists")
 
     logging.info(f"Project '{project_name}' created")
 

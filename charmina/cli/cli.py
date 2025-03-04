@@ -42,7 +42,9 @@ def env_command():
     console.print(syntax)
 
 
-@app.command("config", help="Print the active project configuration (config.yml)")
+@app.command(
+    "config", help="Print the active project configuration (charmina.config.yml)"
+)
 def config_command(
     section: Annotated[
         Optional[str],
@@ -72,7 +74,7 @@ def config_command(
                 "# Active configuration {section_suffix}".format(
                     section_suffix=f" - {section}" if section else ""
                 ),
-                "# See more info in https://github.com/raulonlab/charmina/blob/main/charmina/config.yml",
+                "# See more info in https://github.com/raulonlab/charmina/blob/main/charmina/charmina.config.yml",
                 config_yaml,
             ]
         ),
